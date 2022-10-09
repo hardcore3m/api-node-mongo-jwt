@@ -1,1 +1,1 @@
-module.exports = 'mongodb+srv://<user>:<password>@cluster0.agtgn.mongodb.net/?retryWrites=true&w=majority';
+module.exports = process.env.URI;

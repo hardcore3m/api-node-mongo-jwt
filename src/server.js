@@ -1,17 +1,27 @@
 const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
+const cookieParser = require('cookie-parser');
 const app = express();
+
 var corsOptions = {
     origin: "http://localhost:8081"
 };
+require('dotenv').config()
+
+
+var bcrypt = require("bcryptjs");
+
 app.use(cors(corsOptions));
+
 // parse requests of content-type - application/json
 app.use(express.json());
+
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({
     extended: true
 }));
+
 app.use(
     cookieSession({
         name: "oxlabs-session",

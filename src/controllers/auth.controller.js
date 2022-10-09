@@ -119,17 +119,18 @@ exports.signin = (req, res) => {
                 });
             }
             
-            // Gera um token
-            let token = jwt.sign({
-                id: user.id
-            }, config.secret, {
-                expiresIn: config.jwtExpiration,
-            });
-            let refreshToken = await RefreshToken.createToken(user);
             let authorities = [];
             for (let i = 0; i < user.roles.length; i++) {
                 authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
             }
+            // Gera um token
+            let token = jwt.sign({
+                id: user.id,roles:authorities
+            }, config.secret, {
+                expiresIn: config.jwtExpiration,
+            });
+            let refreshToken = await RefreshToken.createToken(user);
+            
             res.status(200).send({
                 id: user._id,
                 username: user.username,
